@@ -1,0 +1,17 @@
+[package]
+name = "tweetnacl-rs"
+version = "0.1.0"
+authors = ["clearloop <udtrokia@gmail.com>"]
+edition = "2018"
+readme = "README.md"
+description = "TweetNacl library, re-export from sodalite."
+license = "MIT"
+documentation = "https://docs.rs/tweetnacl-rs"
+homepage = "https://github.com/clearloop/tweetnacl-rs"
+repository = "https://github.com/clearloop/tweetnacl-rs"
+categories = ["cryptography", "algorithms"]
+keywords = ["sodalite", "tweetnacl"]
+
+[dependencies]
+rand = "0.6.5"
+sodalite = "0.3"
