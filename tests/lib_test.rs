@@ -7,8 +7,8 @@ fn test_gen() {
     assert_eq!(pk.len(), 32);
     assert_eq!(sk.len(), 64);
 
-    let sm = sk.sign("hello, world");
-    let ret = pk.verify("hello, world", &sm);
+    let sm = sk.sign("hello, world".to_string());
+    let ret = pk.verify("hello, world".to_string(), &sm);
 
     assert_eq!(sm.len(), 76);
     assert_eq!(ret, true);
@@ -21,10 +21,10 @@ fn test_panic_verify() {
     assert_eq!(pk.len(), 32);
     assert_eq!(sk.len(), 64);
 
-    let sm = sk.sign("hello, world");
+    let sm = sk.sign("hello, world".to_string());
     assert_eq!(sm.len(), 76);
 
-    pk.verify("foo", &sm);
+    pk.verify("foo".to_string(), &sm);
 }
 
 #[test]
@@ -48,7 +48,7 @@ fn test_seed_tweetnacl() {
         58, 192, 72, 161, 139, 89, 218, 41
     ]);
 
-    let sm = sk.sign("hello, world");
+    let sm = sk.sign("hello, world".to_string());
     assert_eq!(sm.to_vec(), vec![
         178, 139, 95, 24, 176, 228, 2, 204,
         104, 121, 144, 26, 157, 219, 132, 195,
@@ -62,6 +62,6 @@ fn test_seed_tweetnacl() {
         111, 114, 108, 100
     ]);
 
-    let ret = pk.verify("hello, world", &sm);
+    let ret = pk.verify("hello, world".to_string(), &sm);
     assert_eq!(ret, true);    
 }

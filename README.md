@@ -37,10 +37,10 @@ fn main() {
     println!("public key: {:?}", pk);
     println!("secret key: {:?}", sk.to_vec());
 
-    let sm = sk.sign("hello, world");    
+    let sm = sk.sign("hello, world".to_string());
     println!("signed message: {:?}", sm.to_vec());
 
-    let ret = pk.verify("hello, world", &sm);
+    let ret = pk.verify("hello, world".to_string(), &sm);
     assert_eq!(ret, true);
 }
 ```
