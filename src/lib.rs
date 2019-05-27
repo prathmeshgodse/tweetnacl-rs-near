@@ -16,6 +16,14 @@ pub fn gen() -> (PublicKey, SecretKey) {
     (pk, sk)
 }
 
+pub fn to_hex<T: std::convert::AsRef<[u8]>>(bytes: T) -> String {
+    hex::encode(bytes)
+}
+
+pub fn from_hex<T: std::convert::AsRef<[u8]>>(string: T) -> Vec<u8> {
+    hex::decode(string).unwrap()
+}
+
 /// `TweetNacl` Trait for slice.
 ///
 /// # Usage

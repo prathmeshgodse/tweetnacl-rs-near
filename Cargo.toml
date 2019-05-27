@@ -1,6 +1,6 @@
 [package]
 name = "tweetnacl-rs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["clearloop <udtrokia@gmail.com>"]
 edition = "2018"
 readme = "README.md"
@@ -13,5 +13,6 @@ categories = ["cryptography", "algorithms"]
 keywords = ["sodalite", "tweetnacl"]
 
 [dependencies]
+hex = "0.3.2"
 rand = "0.6.5"
 sodalite = "0.3"
