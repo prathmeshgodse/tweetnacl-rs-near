@@ -12,6 +12,16 @@ You can test the keypair in command line directly, for example:
 ```shell
 $ cargo install tweetnacl-rs
 $ tweetnacl-rs
+tweetnacl-rs
+============
+Usage: tweetnacl-rs <Command> <args>
+
+Commands:
+  gen     <nil>                               => generate keypair
+  sign    <message> <secretkey>               => sign message
+  verify  <message> <signature> <publickey>   => verify message
+
+$ tweetnacl-rs gen
 public-key: "aa73d5a6c526bbad121a0c44d84cf31ae705bbadaf1221759a4da10e6d8fdcf1"
 secret-key: "cb6e6713a8c2aba686b0ad4d7d914f1a9a31ee450a3d60b7d979131c045066a9aa73d5a6c526bbad121a0c44d84cf31ae705bbadaf1221759a4da10e6d8fdcf1"
 ```
@@ -35,7 +45,7 @@ fn main() {
 }
 ```
 
-## License
+## LICENSE
 
 [MIT][2]
 

@@ -44,8 +44,8 @@ pub fn from_hex<T: std::convert::AsRef<[u8]>>(string: T) -> Vec<u8> {
 /// ```
 pub trait TweetNacl {
     fn gen(self) -> (PublicKey, SecretKey);
-    fn sign(self, _m: &'static str) -> Vec<u8>;
-    fn verify(self, _m: &'static str, _sm: &Vec<u8>) -> bool;
+    fn sign(self, _m: String) -> Vec<u8>;
+    fn verify(self, _m: String, _sm: &Vec<u8>) -> bool;
 }
 
 impl TweetNacl for &[u8] {
@@ -67,7 +67,7 @@ impl TweetNacl for &[u8] {
     }
 
     /// Sign a message using secret key.
-    fn sign(self, _m: &'static str) -> Vec<u8> {
+    fn sign(self, _m: String) -> Vec<u8> {
         let mut m: Vec<u8> = vec![];
         let mut sm: Vec<u8> = vec![0; 64];
         let mut sk: SecretKey = [0; 64];
@@ -85,7 +85,7 @@ impl TweetNacl for &[u8] {
     /// # Panics
     /// + PublicKey should be `[u8; 32]`.
     /// + __Signed Message__'s length `minus` __Message__'s length shoule be 64.
-    fn verify(self, _m: &'static str, _sm: &Vec<u8>) -> bool {
+    fn verify(self, _m: String, _sm: &Vec<u8>) -> bool {
         let mut m: Vec<u8> = vec![0; 64];
         let mut sm: Vec<u8> = vec![];
 
