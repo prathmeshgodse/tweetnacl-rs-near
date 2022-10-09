@@ -1,7 +1,7 @@
 [package]
-name = "tweetnacl-rs"
+name = "tweetnacl-rs-near"
 version = "0.1.3"
-authors = ["clearloop <udtrokia@gmail.com>"]
+authors = ["prathmesh"]
 edition = "2018"
 readme = "README.md"
 description = "TweetNacl library, re-export from sodalite."
@@ -10,7 +10,7 @@ documentation = "https://docs.rs/tweetnacl-rs"
 homepage = "https://github.com/clearloop/tweetnacl-rs"
 repository = "https://github.com/clearloop/tweetnacl-rs"
 categories = ["cryptography", "algorithms"]
-keywords = ["sodalite", "tweetnacl"]
+keywords = ["sodalite", "tweetnacl", "near"]
 
 [dependencies]
 hex = "0.3.2"

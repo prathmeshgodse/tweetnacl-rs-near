@@ -1,8 +1,9 @@
-use tweetnacl_rs::TweetNacl;
-use tweetnacl_rs::{to_hex, from_hex};
+use tweetnacl_rs_near::TweetNacl;
+use tweetnacl_rs_near::{from_hex, to_hex};
 
 fn help() {
-    println!(r#"tweetnacl-rs
+    println!(
+        r#"tweetnacl-rs
 ============
 Usage: tweetnacl-rs <Command> <args>
 
@@ -10,7 +11,8 @@ Commands:
   gen     <nil>                               => generate keypair
   sign    <message> <secretkey>               => sign message
   verify  <message> <signature> <publickey>   => verify message
-"#);
+"#
+    );
 }
 
 /// test-public-key:
@@ -31,14 +33,14 @@ fn main() {
         help();
         return;
     }
-    
+
     let cmd = args[1].as_str();
     match cmd {
         "gen" => {
-            let (pk, sk) = tweetnacl_rs::gen();
-            println!("public-key: {:?}", tweetnacl_rs::to_hex(pk));
-            println!("secret-key: {:?}", tweetnacl_rs::to_hex(sk.to_vec()));
-        },
+            let (pk, sk) = tweetnacl_rs_near::gen();
+            println!("public-key: {:?}", tweetnacl_rs_near::to_hex(pk));
+            println!("secret-key: {:?}", tweetnacl_rs_near::to_hex(sk.to_vec()));
+        }
         "sign" => {
             if args[3].to_owned().len() != 128 {
                 println!("<secret-key's length should be 128>");
@@ -51,7 +53,7 @@ fn main() {
             println!("message: {:?}\n", args[2].to_owned());
             println!("secret-key: {:?}\n", args[3].to_owned());
             println!("signatrue-hex: {:?}", to_hex(sign));
-        },
+        }
         "verify" => {
             if args[4].to_owned().len() != 64 {
                 println!("<public-key's length should be 64>");
@@ -61,13 +63,13 @@ fn main() {
             let pk = from_hex(String::from(args[4].to_owned()));
             let ret = pk.verify(
                 String::from(args[2].to_owned()),
-                &from_hex(String::from(args[3].to_owned()))
+                &from_hex(String::from(args[3].to_owned())),
             );
 
             println!("message: {:?}\n", args[2].to_owned());
             println!("signatrue-hex: {:?}\n", args[3].to_owned());
             println!("verification: {:?}", ret);
         }
-        _ => help()
+        _ => help(),
     }
 }
