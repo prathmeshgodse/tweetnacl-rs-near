@@ -16,3 +16,4 @@ keywords = ["sodalite", "tweetnacl"]
 hex = "0.3.2"
 rand = "0.6.5"
 sodalite = "0.3"
+near-sdk = "4.0.0"

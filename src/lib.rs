@@ -1,4 +1,5 @@
-use rand::RngCore;
+use near_sdk::env;
+// use rand::RngCore;
 
 type Seed = [u8; 32];
 type PublicKey = [u8; 32];
@@ -8,11 +9,11 @@ type SecretKey = [u8; 64];
 pub fn gen() -> (PublicKey, SecretKey) {
     let mut pk: PublicKey = [0; 32];
     let mut sk: SecretKey = [0; 64];
-    let mut seed: Seed = [0; 32];
-    ::rand::thread_rng().fill_bytes(&mut seed);
+    let seed: Seed = env::random_seed_array();
+    // ::rand::thread_rng().fill_bytes(&mut seed);
 
     ::sodalite::sign_keypair_seed(&mut pk, &mut sk, &seed);
-    
+
     (pk, sk)
 }
 
@@ -29,15 +30,15 @@ pub fn from_hex<T: std::convert::AsRef<[u8]>>(string: T) -> Vec<u8> {
 /// # Usage
 /// ```rust
 /// use tweetnacl_rs::TweetNacl;
-/// 
+///
 /// fn main() {
 ///     let (pk, sk) = [0; 32].gen();
 ///     println!("public key: {:?}", pk);
 ///     println!("secret key: {:?}", sk.to_vec());
-/// 
+///
 ///     let sm = sk.sign("hello, world".to_string());
 ///     println!("signed message: {:?}", sm.to_vec());
-/// 
+///
 ///     let ret = pk.verify("hello, world".to_string(), &sm);
 ///     assert_eq!(ret, true);
 /// }
@@ -55,14 +56,14 @@ impl TweetNacl for &[u8] {
     /// Seed should be `[u8; 32]`.
     fn gen(self) -> (PublicKey, SecretKey) {
         assert_eq!(self.len(), 32);
-        
+
         let mut pk: PublicKey = [0; 32];
         let mut sk: SecretKey = [0; 64];
         let mut seed: Seed = [0; 32];
-        
+
         seed.copy_from_slice(self);
         ::sodalite::sign_keypair_seed(&mut pk, &mut sk, &seed);
-        
+
         (pk, sk)
     }
 
@@ -79,7 +80,7 @@ impl TweetNacl for &[u8] {
 
         sm
     }
-    
+
     /// Verify signature.
     ///
     /// # Panics
@@ -91,13 +92,13 @@ impl TweetNacl for &[u8] {
 
         m.append(_m.as_bytes().to_vec().as_mut());
         sm.append(_sm.to_vec().as_mut());
-        
+
         assert_eq!(self.len(), 32);
         assert_eq!(sm.len() - m.len(), 0);
 
         let mut pk: PublicKey = [0; 32];
         pk.copy_from_slice(self);
-        
+
         ::sodalite::sign_attached_open(&mut m, &sm, &pk).is_ok()
     }
 }
